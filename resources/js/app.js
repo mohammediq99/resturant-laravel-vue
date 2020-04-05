@@ -5,9 +5,10 @@
  */
 
 require('./bootstrap');
-
+require('vue-multiselect/dist/vue-multiselect.min.css');
+import Vue from 'vue';
 window.Vue = require('vue');
-
+Vue.component('menu-container', require('./models/menu/MenuContainer.vue').default);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -18,8 +19,9 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
+// these are reusable components
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('card-component', require('./components/Card.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
