@@ -12,14 +12,11 @@ class ModelsMenuController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $restoId = [1];
-        $menus = \App\ModelsMenu::whereIn('resto_id',$restoId)->get()->groupBy('category.name');
-  
-  
- 
-return response()->json($menus ,200);
+        $restoId = $id;
+        $menus = \App\ModelsMenu::where('resto_id',$restoId)->get()->groupBy('category.name');
+        return view('menu.menu-index' ,compact('menus' ,'restoId'  ) );
     }
 
     /**
@@ -63,6 +60,17 @@ $menu = ModelsMenu::create([
 return response()->json($menu ,201);
       
     }
+
+public function getMenuItems(Request $request)
+{
+    $this->validate($request,[
+        'restoId' => 'required'
+    ]);
+      $menus = \App\ModelsMenu::where('resto_id',$request->restoId)
+     // ->orderBy('category')
+      ->get();
+      return response()->json($menus , 200);
+}
 
     /**
      * Display the specified resource.

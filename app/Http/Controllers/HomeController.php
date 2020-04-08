@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -26,7 +26,8 @@ class HomeController extends Controller
         $restoId = 1;
       $menus = \App\ModelsMenu::where('resto_id',$restoId)->get()->groupBy('category.name');
 
-
-        return view('home', compact('menus' ) , compact('restoId'));
+      $restos =  Auth::user()->restos()->get();
+   
+        return view('home', compact('menus' ,'restoId' ,'restos' ));
     }
 }

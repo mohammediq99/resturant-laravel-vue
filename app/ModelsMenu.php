@@ -14,4 +14,8 @@ class ModelsMenu extends Model
     {
       return $this->belongsTo('App\Category','category_id');
     }
+    public function resto()
+    {
+        return $this->belongsTo('App\resurant', 'resto_id');
+    }
 }

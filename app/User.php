@@ -5,11 +5,15 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-
+    use HasApiTokens,Notifiable;
+public function restos()
+{
+    return $this->hasMany('App\Resurant', 'owner_id');
+}
     /**
      * The attributes that are mass assignable.
      *

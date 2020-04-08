@@ -24,4 +24,13 @@ Route::get('/get/menu' , function(){
 
 
 });
-Route::get('/items','ModelsMenuController@index');
+Route::group(['middleware' => 'auth'], function () {
+    
+
+//Route::get('/items','ModelsMenuController@index');
+Route::get('/restos', 'ResurantController@index')->name('restos');
+Route::get('/restos/menu/{id}' , 'ModelsMenuController@index' )->name('restos.menu');
+Route::get('/restos/order/{id}' , 'OrderController@index' )->name('restos.order');
+Route::get('/restos/order/{id}/add' , 'OrderController@add' )->name('restos.order.add');
+
+});

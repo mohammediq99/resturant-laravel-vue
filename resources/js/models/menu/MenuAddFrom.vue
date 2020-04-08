@@ -5,7 +5,7 @@
 <div class="form-group">
 <label for="name"> food name </label>
 <input type="text" class="form-control" id="name" v-model="food.item" placeholder="Enter food name"/>
-<div class="err-valid" v-text="validation.getMessage('item')"></div>
+<div class="err-valid" ></div>
 </div>
 
 
@@ -44,8 +44,7 @@ import axios from 'axios';
 export default {
     data(){
         return{
-            food: this.emptyFood(),
-            validation:  new validator()
+            food: this.emptyFood(), 
         }
     },
     components:{
@@ -71,8 +70,7 @@ export default {
                 console.log(response.data);
                 }).catch((error) => {
                     console.log(error.response);
-                    if (error.response.status == 422 ) {
-                        this.validation.setMessage(error.response.data.errors);
+                    if (error.response.status == 422 ) { 
                     }
                 ///console.log(error);
 
